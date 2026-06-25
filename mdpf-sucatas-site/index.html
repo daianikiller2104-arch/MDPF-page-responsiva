@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MDPF Sucatas — Compra de Sucatas Ferrosas e Não Ferrosas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#0A0A0A;
+    --black-soft:#141414;
+    --green:#5CC419;
+    --green-deep:#1C2E14;
+    --green-dark:#0F1A0A;
+    --chrome:#B8BCC0;
+    --chrome-dim:#6B706B;
+    --paper:#F2F2F0;
+    --rust:#C9622A;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--black);
+    color:var(--paper);
+    font-family:'Inter',sans-serif;
+    overflow-x:hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+  }
+
+  h1,h2,h3,.display{
+    font-family:'Anton',sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+    font-weight:400;
+  }
+
+  a{color:inherit; text-decoration:none;}
+
+  /* texture overlay */
+  .grain{
+    position:fixed; inset:0; pointer-events:none; z-index:1;
+    opacity:0.05; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ============ HEADER ============ */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 6vw;
+    background:rgba(10,10,10,0.85);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(184,188,192,0.12);
+  }
+  .logo-mark{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Anton',sans-serif;
+    font-size:1.4rem;
+    letter-spacing:0.02em;
+  }
+  .logo-mark .pf{color:var(--green);}
+  header nav{display:flex; gap:32px;}
+  header nav a{
+    font-size:0.85rem; font-weight:600; letter-spacing:0.06em;
+    text-transform:uppercase; color:var(--chrome);
+    transition:color 0.2s;
+    position:relative;
+  }
+  header nav a:hover, header nav a:focus-visible{color:var(--green);}
+  header nav a:focus-visible{outline:2px solid var(--green); outline-offset:4px;}
+  .header-cta{
+    background:var(--green); color:var(--black);
+    padding:10px 20px; border-radius:3px;
+    font-weight:700; font-size:0.85rem; letter-spacing:0.04em;
+    text-transform:uppercase;
+    transition:transform 0.2s, box-shadow 0.2s;
+  }
+  .header-cta:hover{transform:translateY(-2px); box-shadow:0 6px 18px rgba(92,196,25,0.35);}
+  @media (max-width:760px){
+    header nav{display:none;}
+  }
+
+  /* ============ HERO ============ */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex; flex-direction:column; justify-content:center;
+    padding:140px 6vw 80px;
+    background:
+      radial-gradient(circle at 85% 20%, rgba(92,196,25,0.14), transparent 45%),
+      linear-gradient(100deg, rgba(10,10,10,0.96) 0%, rgba(10,10,10,0.88) 32%, rgba(10,10,10,0.55) 58%, rgba(10,10,10,0.35) 100%),
+      url('hero-bg.jpg');
+    background-size:cover;
+    background-position:center 30%;
+  }
+
+  .hero-ring{
+    position:absolute;
+    right:-8vw; top:50%; transform:translateY(-50%);
+    width:60vw; max-width:780px;
+    opacity:0.45;
+    animation:spin 90s linear infinite;
+    z-index:0;
+  }
+  @keyframes spin{ to{ transform:translateY(-50%) rotate(360deg); } }
+
+  .hero-content{position:relative; z-index:2; max-width:780px;}
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    font-size:0.8rem; font-weight:700; letter-spacing:0.18em;
+    color:var(--green); text-transform:uppercase;
+    margin-bottom:24px;
+  }
+  .eyebrow::before{
+    content:''; width:28px; height:2px; background:var(--green);
+  }
+
+  .hero h1{
+    font-size:clamp(3rem, 8vw, 6.5rem);
+    line-height:0.95;
+    color:var(--paper);
+  }
+  .hero h1 .accent{
+    color:var(--green);
+    -webkit-text-stroke:2px var(--green);
+  }
+
+  .hero p.lede{
+    font-size:clamp(1.05rem, 1.6vw, 1.3rem);
+    color:var(--chrome);
+    max-width:540px;
+    margin-top:24px;
+    line-height:1.5;
+  }
+
+  .hero-actions{
+    display:flex; gap:18px; margin-top:40px; flex-wrap:wrap;
+  }
+  .btn-primary{
+    background:var(--green); color:var(--black);
+    padding:18px 32px; border-radius:3px;
+    font-weight:800; font-size:1rem; letter-spacing:0.03em;
+    display:inline-flex; align-items:center; gap:10px;
+    transition:transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-primary:hover, .btn-primary:focus-visible{transform:translateY(-3px); box-shadow:0 10px 28px rgba(92,196,25,0.4);}
+  .btn-primary:focus-visible{outline:2px solid var(--paper); outline-offset:3px;}
+  .btn-ghost{
+    border:1.5px solid var(--chrome-dim); color:var(--paper);
+    padding:18px 28px; border-radius:3px;
+    font-weight:700; font-size:1rem;
+    transition:border-color 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover, .btn-ghost:focus-visible{border-color:var(--green); color:var(--green);}
+  .btn-ghost:focus-visible{outline:2px solid var(--green); outline-offset:3px;}
+
+  .hero-stats{
+    display:flex; gap:48px; margin-top:64px; flex-wrap:wrap;
+  }
+  .hero-stats div{border-left:2px solid var(--green-deep); padding-left:16px;}
+  .hero-stats strong{display:block; font-family:'Anton',sans-serif; font-size:1.8rem; color:var(--paper);}
+  .hero-stats span{font-size:0.8rem; color:var(--chrome-dim); text-transform:uppercase; letter-spacing:0.05em;}
+
+  /* ============ SECTION SHARED ============ */
+  section{padding:120px 6vw; position:relative;}
+  .section-head{max-width:680px; margin-bottom:64px;}
+  .section-head .eyebrow{margin-bottom:18px;}
+  .section-head h2{font-size:clamp(2.2rem, 4vw, 3.4rem); color:var(--paper);}
+  .section-head p{color:var(--chrome); font-size:1.1rem; margin-top:18px; line-height:1.6;}
+
+  /* divider with recycle-arrow motif */
+  .divider{
+    display:flex; align-items:center; gap:16px;
+    padding:0 6vw; color:var(--chrome-dim);
+  }
+  .divider::before, .divider::after{
+    content:''; flex:1; height:1px; background:rgba(184,188,192,0.15);
+  }
+  .divider svg{width:22px; height:22px; flex-shrink:0;}
+
+  /* ============ SOBRE ============ */
+  .sobre{background:var(--black-soft);}
+  .sobre-grid{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:64px; align-items:center;
+  }
+  .sobre-text p{color:var(--chrome); font-size:1.05rem; line-height:1.75; margin-bottom:20px;}
+  .sobre-text p strong{color:var(--paper); font-weight:700;}
+
+  .sobre-visual{
+    position:relative; aspect-ratio:1/1; border-radius:6px;
+    background:linear-gradient(135deg, var(--green-deep), var(--black));
+    border:1px solid rgba(92,196,25,0.25);
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+  .sobre-visual svg{width:62%; height:62%;}
+
+  .sobre-values{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:56px;
+  }
+  .value-card{
+    border-top:2px solid var(--green);
+    padding-top:18px;
+  }
+  .value-card h3{
+    font-family:'Inter',sans-serif; text-transform:none; font-weight:700;
+    font-size:1.05rem; color:var(--paper); margin-bottom:8px;
+  }
+  .value-card p{color:var(--chrome-dim); font-size:0.92rem; line-height:1.5;}
+
+  @media (max-width:880px){
+    .sobre-grid{grid-template-columns:1fr;}
+    .sobre-visual{max-width:320px; margin:0 auto;}
+    .sobre-values{grid-template-columns:1fr;}
+  }
+
+  /* ============ O QUE COMPRAMOS ============ */
+  .compramos{background:var(--black);}
+  .compra-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:1px;
+    background:rgba(184,188,192,0.12);
+    border:1px solid rgba(184,188,192,0.12);
+  }
+  .compra-card{
+    background:var(--black-soft);
+    padding:40px 32px;
+    transition:background 0.25s;
+    position:relative;
+  }
+  .compra-card:hover{background:var(--green-dark);}
+  .compra-card .icon-wrap{
+    width:56px; height:56px; border-radius:50%;
+    background:var(--green-deep); border:1px solid rgba(92,196,25,0.4);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:24px;
+    transition:background 0.25s, border-color 0.25s;
+  }
+  .compra-card:hover .icon-wrap{background:var(--green); border-color:var(--green);}
+  .compra-card .icon-wrap svg{width:26px; height:26px; stroke:var(--green); transition:stroke 0.25s;}
+  .compra-card:hover .icon-wrap svg{stroke:var(--black);}
+  .compra-card h3{
+    font-family:'Inter',sans-serif; text-transform:none; font-weight:700;
+    font-size:1.2rem; color:var(--paper); margin-bottom:10px;
+  }
+  .compra-card p{color:var(--chrome-dim); font-size:0.95rem; line-height:1.55;}
+
+  @media (max-width:880px){
+    .compra-grid{grid-template-columns:1fr;}
+  }
+
+  /* ============ CONTATO ============ */
+  .contato{
+    background:linear-gradient(180deg, var(--black-soft), var(--green-dark));
+    border-top:1px solid rgba(92,196,25,0.15);
+  }
+  .contato-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:48px;
+  }
+  .contact-card{
+    background:rgba(20,20,20,0.6);
+    border:1px solid rgba(184,188,192,0.15);
+    border-radius:6px;
+    padding:32px;
+    display:flex; gap:20px; align-items:flex-start;
+    transition:border-color 0.25s, transform 0.25s;
+  }
+  .contact-card:hover{border-color:var(--green); transform:translateY(-4px);}
+  .phone-icon{
+    width:52px; height:52px; border-radius:50%; flex-shrink:0;
+    background:var(--green); display:flex; align-items:center; justify-content:center;
+  }
+  .phone-icon svg{width:24px; height:24px; stroke:var(--black);}
+  .contact-card .num{font-family:'Anton',sans-serif; font-size:1.5rem; color:var(--paper); letter-spacing:0.01em;}
+  .contact-card .name{color:var(--green); font-weight:700; font-size:0.95rem; margin-top:4px;}
+  .contact-card .role{color:var(--chrome-dim); font-size:0.85rem; margin-top:2px; text-transform:uppercase; letter-spacing:0.04em;}
+
+  @media (max-width:760px){
+    .contato-grid{grid-template-columns:1fr;}
+  }
+
+  .contato-cta{
+    text-align:center; margin-top:64px;
+  }
+  .contato-cta p{color:var(--chrome); font-size:1.1rem; margin-bottom:24px;}
+
+  /* ============ FOOTER ============ */
+  footer{
+    padding:40px 6vw;
+    border-top:1px solid rgba(184,188,192,0.12);
+    display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:16px;
+    color:var(--chrome-dim); font-size:0.85rem;
+  }
+  footer .logo-mark{font-size:1.1rem;}
+
+  /* reveal animation */
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity 0.7s ease, transform 0.7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+
+<header>
+  <div class="logo-mark">MD<span class="pf">PF</span> SUCATAS</div>
+  <nav>
+    <a href="#sobre">A Empresa</a>
+    <a href="#compramos">O Que Compramos</a>
+    <a href="#contato">Contato</a>
+  </nav>
+  <a class="header-cta" href="https://wa.me/5511912369617" target="_blank" rel="noopener">WhatsApp</a>
+</header>
+
+<section class="hero">
+  <svg class="hero-ring" viewBox="0 0 400 400" aria-hidden="true">
+    <circle cx="200" cy="200" r="170" fill="none" stroke="#5CC419" stroke-width="2" stroke-dasharray="4 10" opacity="0.35"/>
+    <circle cx="200" cy="200" r="140" fill="none" stroke="#5CC419" stroke-width="1.5" opacity="0.18"/>
+    <path d="M 200 30 A 170 170 0 0 1 360 165" fill="none" stroke="#5CC419" stroke-width="6" stroke-linecap="round" opacity="0.55"/>
+    <path d="M 345 145 L 365 168 L 338 178" fill="#5CC419" opacity="0.55"/>
+  </svg>
+
+  <div class="hero-content">
+    <div class="eyebrow">Compra de sucatas &amp; recicláveis</div>
+    <h1>TRANSFORMAMOS<br>SUCATA EM<br><span class="accent">DINHEIRO</span></h1>
+    <p class="lede">A MDPF Sucatas compra carros velhos, sucatas ferrosas e não ferrosas com avaliação justa e pagamento na hora. Atendimento rápido, direto e sem burocracia.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="https://wa.me/5511912369617" target="_blank" rel="noopener">
+        Falar no WhatsApp
+      </a>
+      <a class="btn-ghost" href="#compramos">Ver o que compramos</a>
+    </div>
+    <div class="hero-stats">
+      <div><strong>100%</strong><span>Avaliação justa</span></div>
+      <div><strong>Na hora</strong><span>Pagamento</span></div>
+      <div><strong>SP</strong><span>Região atendida</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sobre" id="sobre">
+  <div class="section-head reveal">
+    <div class="eyebrow">A empresa</div>
+    <h2>QUEM FAZ A SUCATA<br>VALER A PENA</h2>
+  </div>
+  <div class="sobre-grid">
+    <div class="sobre-text reveal">
+      <p>A <strong>MDPF Sucatas</strong> nasceu para resolver um problema simples: aquele carro velho parado, a sucata de obra acumulada, o material que sobrou e ninguém sabe o que fazer. A gente compra, retira e paga — sem complicação.</p>
+      <p>Trabalhamos com <strong>avaliação transparente</strong> e atendimento direto com quem decide. Cada ligação é atendida por alguém que entende do negócio e resolve sua venda no mesmo contato.</p>
+      <div class="sobre-values">
+        <div class="value-card">
+          <h3>Avaliação justa</h3>
+          <p>Pesagem e preço transparentes, sem letra pequena.</p>
+        </div>
+        <div class="value-card">
+          <h3>Retirada rápida</h3>
+          <p>Buscamos o material onde ele estiver, sem demora.</p>
+        </div>
+        <div class="value-card">
+          <h3>Pagamento na hora</h3>
+          <p>Você fecha o negócio e recebe no mesmo dia.</p>
+        </div>
+      </div>
+    </div>
+    <div class="sobre-visual reveal">
+      <svg viewBox="0 0 200 200" aria-hidden="true">
+        <circle cx="100" cy="100" r="90" fill="none" stroke="#5CC419" stroke-width="3" opacity="0.3"/>
+        <path d="M100 20 A 80 80 0 0 1 175 70" fill="none" stroke="#5CC419" stroke-width="10" stroke-linecap="round"/>
+        <path d="M158 50 L 180 70 L 152 84" fill="#5CC419"/>
+        <path d="M100 180 A 80 80 0 0 1 25 130" fill="none" stroke="#5CC419" stroke-width="10" stroke-linecap="round"/>
+        <path d="M42 150 L 20 130 L 48 116" fill="#5CC419"/>
+        <text x="100" y="108" text-anchor="middle" font-family="Anton" font-size="34" fill="#F2F2F0">MD<tspan fill="#5CC419">PF</tspan></text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 24 24" fill="none" stroke="#5CC419" stroke-width="2"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>
+</div>
+
+<section class="compramos" id="compramos">
+  <div class="section-head reveal">
+    <div class="eyebrow">O que compramos</div>
+    <h2>TODOS OS TIPOS<br>DE SUCATA</h2>
+    <p>Se tem metal, provavelmente a gente compra. Confira as principais categorias:</p>
+  </div>
+  <div class="compra-grid reveal">
+    <div class="compra-card">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14M5 17a2 2 0 01-2-2v-2.5a2 2 0 01.4-1.2L6 7h12l2.6 4.3a2 2 0 01.4 1.2V15a2 2 0 01-2 2M5 17a2 2 0 002 2h0a2 2 0 002-2M15 17a2 2 0 002 2h0a2 2 0 002-2M9 11h6"/></svg>
+      </div>
+      <h3>Carros velhos</h3>
+      <p>Veículos sem uso, batidos ou fora de circulação. Avaliamos e retiramos de onde estiverem.</p>
+    </div>
+    <div class="compra-card">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06A1.65 1.65 0 005 15a1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 009 4.6a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06A1.65 1.65 0 0019 9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+      </div>
+      <h3>Sucatas ferrosas</h3>
+      <p>Ferro, aço e ligas metálicas de obras, indústrias e descartes em geral.</p>
+    </div>
+    <div class="compra-card">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4.5L6 21l1.5-7.5L2 9h7z"/></svg>
+      </div>
+      <h3>Sucatas não ferrosas</h3>
+      <p>Cobre, alumínio, latão, bronze e outros metais não magnéticos.</p>
+    </div>
+    <div class="compra-card">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="1"/><path d="M16 7V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v3"/></svg>
+      </div>
+      <h3>Materiais industriais</h3>
+      <p>Estruturas, máquinas e equipamentos fora de uso.</p>
+    </div>
+    <div class="compra-card">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+      </div>
+      <h3>Fios e cabos</h3>
+      <p>Cabeamento elétrico, fiação de cobre e materiais de demolição.</p>
+    </div>
+    <div class="compra-card">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 11-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
+      </div>
+      <h3>Entre outros</h3>
+      <p>Tem um material que não está na lista? Nos chame e a gente avalia.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 24 24" fill="none" stroke="#5CC419" stroke-width="2"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>
+</div>
+
+<section class="contato" id="contato">
+  <div class="section-head reveal">
+    <div class="eyebrow">Fale com a gente</div>
+    <h2>PRONTO PARA<br>VENDER SUA SUCATA?</h2>
+    <p>Entre em contato direto com nossa equipe. Atendimento rápido, sem intermediários.</p>
+  </div>
+  <div class="contato-grid reveal">
+    <a class="contact-card" href="https://wa.me/5511912369617" target="_blank" rel="noopener">
+      <div class="phone-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      </div>
+      <div>
+        <div class="num">11 91236-9617</div>
+        <div class="name">Daiane Teixeira</div>
+        <div class="role">Representante Comercial</div>
+      </div>
+    </a>
+    <a class="contact-card" href="https://wa.me/5511949614004" target="_blank" rel="noopener">
+      <div class="phone-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      </div>
+      <div>
+        <div class="num">11 94961-4004</div>
+        <div class="name">Daiani Oliveira</div>
+        <div class="role">Administração</div>
+      </div>
+    </a>
+  </div>
+  <div class="contato-cta reveal">
+    <p>Avaliação rápida, sem compromisso. Chama no WhatsApp agora mesmo.</p>
+    <a class="btn-primary" href="https://wa.me/5511912369617" target="_blank" rel="noopener">Solicitar avaliação</a>
+  </div>
+</section>
+
+<footer>
+  <div class="logo-mark">MD<span class="pf">PF</span> SUCATAS</div>
+  <div>© 2026 MDPF Sucatas. Todos os direitos reservados.</div>
+</footer>
+
+<script>
+  // scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
